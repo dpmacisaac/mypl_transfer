@@ -1,0 +1,128 @@
+#======================================================================
+# binary search tree implementation
+#======================================================================
+
+
+#----------------------------------------------------------------------
+# tree node that holds an int value
+#----------------------------------------------------------------------
+type Node {
+  var value = 0
+  var Node left = nil
+  var Node right = nil
+}
+
+
+#----------------------------------------------------------------------
+# create a new tree
+#----------------------------------------------------------------------
+fun Node make_tree(int val) {
+  var ptr = new Node
+  ptr.value = val
+  return ptr
+}
+
+
+#----------------------------------------------------------------------
+# insert a value into the given tree
+# assumes root is not nil 
+#----------------------------------------------------------------------
+fun void insert(Node root, int val) {
+  if root == nil {
+    return nil
+  }
+  if val <= root.value {
+    if root.left == nil {
+      root.left = new Node
+      root.left.value = val
+    }
+    else {
+      insert(root.left, val)
+    }
+  }
+  else {
+    if root.right == nil {
+      root.right = new Node
+      root.right.value = val
+    }
+    else {
+      insert(root.right, val)
+    }
+  }
+}
+
+
+#----------------------------------------------------------------------
+# print out the tree in sorted order
+#----------------------------------------------------------------------
+fun void print_tree(Node root) {
+  if root != nil {
+    print_tree(root.left)
+    print(itos(root.value) + " ")
+    print_tree(root.right)
+  }
+}
+
+
+#----------------------------------------------------------------------
+# get the height of the tree
+#----------------------------------------------------------------------
+fun int height(Node root) {
+  if root == nil {
+    return 0
+  }
+  else {
+    var left_height = height(root.left)
+    var right_height = height(root.right)
+    if left_height >= right_height {
+      return 1 + left_height
+    }
+    else {
+      return 1 + right_height
+    }
+  }
+}
+
+#----------------------------------------------------------------------
+# clean up the tree by deleting all nodes
+#----------------------------------------------------------------------
+fun void erase(Node root) {
+  if root == nil {
+    return
+  }
+  erase(root.left)
+  erase(root.right)
+  delete root
+}
+
+#
+# main
+#
+fun void main() {
+
+  #
+  # create a tree and print it
+  # should print ...
+  #   Tree Values: 1 2 5 7 10 12 13 14 15
+  #   Tree Height: 5
+  #
+
+  var tree = make_tree(10)
+
+  insert(tree, 5)
+  insert(tree, 15)
+  insert(tree, 2)
+  insert(tree, 12)
+  insert(tree, 7)
+  insert(tree, 1)
+  insert(tree, 13)
+  insert(tree, 14)
+  print("Tree Values: ")
+  print_tree(tree)  
+  print("\n")
+  print("Tree Height: ")
+  print(itos(height(tree)))
+  print("\n")
+
+  erase(tree)
+}

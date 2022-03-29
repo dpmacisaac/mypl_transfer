@@ -1,0 +1,29 @@
+
+#----------------------------------------------------------------------
+# Basic recursive function tests (factorial)
+#----------------------------------------------------------------------
+
+fun int fac(int n) {
+  if n <= 0 {
+    return 1
+  }
+  else {
+    var r = n * fac(n - 1)
+    return r
+  }
+}
+
+
+fun void main() {
+  var v = 12
+  var r = fac(v)
+  print("the factorial of ")
+  print(v)
+  print(" is ")
+  print(r)
+  print("\n")
+}
+
+
+
+

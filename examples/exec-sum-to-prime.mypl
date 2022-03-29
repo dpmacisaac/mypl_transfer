@@ -1,0 +1,35 @@
+
+#----------------------------------------------------------------------
+# HW-6 Example
+#----------------------------------------------------------------------
+
+
+fun bool is_prime(int n) {
+  var m = n / 2
+  var v = 2
+  while v <= m {
+    var r = n / v
+    var p = r * v
+    if p == n {
+      return false
+    }
+    v = v + 1
+  }
+  return true
+}
+
+
+fun void main() {
+  print("Please enter integer values to sum (prime number to quit)\n")
+  var sum = 0
+  while true {
+    print(">> Enter an int: ")
+    var val = stoi(read())
+    if is_prime(val) {
+      print("The sum is: " + itos(sum) + "\n")
+      print("Goodbye!\n")
+      return
+    }
+    sum = sum + val
+  }
+}

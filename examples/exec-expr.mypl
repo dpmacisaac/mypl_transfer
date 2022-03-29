@@ -1,0 +1,106 @@
+
+#----------------------------------------------------------------------
+# Various expression tests
+#----------------------------------------------------------------------
+
+
+fun void main() {
+  # basic strings
+  print("String Tests: \n")
+  print("  Should be 'a': " + "a" + "\n")
+  print("  Should be 'a': " + 'a' + "\n")
+  print("  Should be 'a': " + ("" + 'a') + "\n")
+  print("  Should be true 'abc' < 'abd': ")
+  if ("abc" < "abd") {print("true\n")} else {print("false\n")}
+  print("  Should be true 'abc' <= 'abd': ")
+  if ("abc" <= "abd") {print("true\n")} else {print("false\n")}
+  print("  Should be true 'abd' > 'abc': ")  
+  if ("abd" > "abc") {print("true\n")} else {print("false\n")}
+  print("  Should be true 'abc' >= 'abc': ")  
+  if ("abc" >= "abc") {print("true\n")} else {print("false\n")}
+  print("  Should be true 'abc == 'abc': ")  
+  if ("abc" == "abc") {print("true\n")} else {print("false\n")}
+  print("  Should be true 'abd != 'abc': ")  
+  if ("abd" != "abc") {print("true\n")} else {print("false\n")}
+
+  # basic integers
+  print("Integer Tests: \n")
+  print("  Should be '5': " + itos(2 + 3) + "\n")
+  print("  Should be '9': " + itos(2 + 3 + 4) + "\n")
+  print("  Should be '6': " + itos(2 * 3) + "\n")
+  print("  Should be '6': " + itos(1 * 2 * 3) + "\n")
+  print("  Should be '1': " + itos(3 / 2) + "\n")
+  print("  Should be '2': " + itos(6 / 3) + "\n")
+  print("  Should be '0': " + itos(6 % 3) + "\n")
+  print("  Should be '-1': " + itos(neg 1) + "\n")
+  print("  Should be true 3 < 4: ")
+  if 3 < 4 {print("true\n")} else {print("false\n")}
+  print("  Should be true 3 <= 4: ")
+  if 3 <= 4 {print("true\n")} else {print("false\n")}
+  print("  Should be true 4 > 3: ")
+  if 4 > 3 {print("true\n")} else {print("false\n")}
+  print("  Should be true 4 >= 3: ")
+  if 4 >= 3 {print("true\n")} else {print("false\n")}
+  print("  Should be true 4 == 4: ")
+  if 4 == 4 {print("true\n")} else {print("false\n")}
+  print("  Should be true 4 != 3: ")
+  if 4 != 3 {print("true\n")} else {print("false\n")}
+  print("  Should be true not 4 != 4: ")
+  if not 4 != 4 {print("true\n")} else {print("false\n")}
+
+  print("Double Tests: \n")
+  print("  Should be '5.5': " + dtos(2.3 + 3.2) + "\n")
+  print("  Should be '9.25': " + dtos(2.05 + 3.1 + 4.1) + "\n")
+  print("  Should be '6.75': " + dtos(2.25 * 3.0) + "\n")
+  print("  Should be '9.375': " + dtos(1.25 * 2.5 * 3.0) + "\n")
+  print("  Should be '1.75': " + dtos(3.5 / 2.0) + "\n")
+  print("  Should be '2.08': " + dtos(6.5 / 3.125) + "\n")
+  print("  Should be '-3.4': " + dtos(neg 3.4) + "\n")
+  print("  Should be true 3.1 < 4.2: ")
+  if 3.1 < 4.2 {print("true\n")} else {print("false\n")}
+  print("  Should be true 3.1 <= 4.2: ")
+  if 3.1 <= 4.2 {print("true\n")} else {print("false\n")}
+  print("  Should be true 4.2 > 3.1: ")
+  if 4.2 > 3.1 {print("true\n")} else {print("false\n")}
+  print("  Should be true 4.2 >= 3.1: ")
+  if 4.2 >= 3.1 {print("true\n")} else {print("false\n")}
+  print("  Should be true 4.2 == 4.2: ")
+  if 4.2 == 4.2 {print("true\n")} else {print("false\n")}
+  print("  Should be true 4.2 != 3.1: ")
+  if 4.2 != 3.1 {print("true\n")} else {print("false\n")}
+
+  print("Bool Tests: \n")  
+  print("  Should be true (not false): ")
+  if not false {print("true\n")} else {print("false\n")}
+  print("  Should be true (true and true): ")
+  if true and true {print("true\n")} else {print("false\n")}
+  print("  Should be true (not false and true): ")
+  if not false and true {print("true\n")} else {print("false\n")}
+  print("  Should be true ((not false) and true): ")
+  if (not false) and true {print("true\n")} else {print("false\n")}
+  print("  Should be true (not (true and false)): ")
+  if not true and false {print("true\n")} else {print("false\n")}  
+  print("  Should be true (true or false): ")
+  if true or false {print("true\n")} else {print("false\n")}  
+  print("  Should be true (false or true): ")
+  if false or true {print("true\n")} else {print("false\n")}  
+  print("  Should be true (false or (not false)): ")
+  if false or (not false) {print("true\n")} else {print("false\n")}  
+  print("  Should be true (not false or false): ")
+  if not false or false {print("true\n")} else {print("false\n")}
+
+  print("Char Tests: \n")
+  print("  Should be true 'a' < 'b': ")
+  if ('a' < 'b') {print("true\n")} else {print("false\n")}
+  print("  Should be true 'a' <= 'a': ")
+  if ('a' <= 'a') {print("true\n")} else {print("false\n")}
+  print("  Should be true 'd' > 'c': ")  
+  if ('d' > 'c') {print("true\n")} else {print("false\n")}
+  print("  Should be true 'b' >= 'a': ")  
+  if ('b' >= 'a') {print("true\n")} else {print("false\n")}  
+  print("  Should be true 'a' == 'a': ")  
+  if ('a' == 'a') {print("true\n")} else {print("false\n")}  
+  print("  Should be true 'b' != 'a': ")  
+  if ('b' != 'a') {print("true\n")} else {print("false\n")}  
+
+}

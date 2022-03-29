@@ -1,0 +1,33 @@
+
+#----------------------------------------------------------------------
+# Compute the catalan numbers (many recursive calls)
+#----------------------------------------------------------------------
+
+fun int fac(int n) {
+  if n <= 0 {
+    return 1
+  }
+  else {
+    var r = n * fac(n - 1)
+    return r
+  }
+}
+
+fun int catalan_number(int n) {
+  if n < 0 {
+    # only defined for n >= 0
+    return 0
+  }
+  return fac(2*n) / (fac(n+1)*fac(n))
+}
+
+#
+# should print: 1, 1, 2, 5, 14, 42, 132
+#
+fun void main() {
+  for n from 0 upto 6 {
+    print("Catalan number " + itos(n) + " = ")
+    print(catalan_number(n))
+    print('\n')
+  }
+}

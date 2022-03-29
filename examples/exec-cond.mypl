@@ -1,0 +1,69 @@
+
+#----------------------------------------------------------------------
+# Basic conditional tests
+#----------------------------------------------------------------------
+
+fun void main() {
+  var x = 10
+  while x > 0 {
+    x = x - 1
+  }
+  print("Should be 0: " + itos(x) + "\n")
+
+  print("Should print else case: ")
+  if (x != 0) or (x < 0) {
+    print("if case\n")
+  }
+  else {
+    print("else case\n")
+  }
+
+  print("Should print elif case: ")
+  if x > 0 {
+    print("if case\n")
+  }
+  elif x <= 0 {
+    print("elif case\n")
+  }
+  else {
+    print("else case")
+  }
+
+  print("Should print else case: ")
+  if x > 0 {
+    print("if case\n")
+  }
+  elif x < 0 {
+    print("elseif case\n")
+  }
+  else {
+    print("else case\n")
+  }
+
+  x = nil
+
+  print("Should print oops: ")
+  if x != nil {
+    print("yes\n")
+  }
+  elif x == nil {
+    print("oops\n")
+  }
+
+  # basic for loop
+  print("should be 1 2 ... 6: ")
+  for i from 1 upto (2*3) {
+    print(i)
+    print(" ")
+  }
+  print("\n")
+
+  # another basic for loop
+  print("should be 5 4 ... 0: ")
+  for i from 5 downto 0 {
+    print(i)
+    print(" ")
+  }
+  print("\n")
+
+}
