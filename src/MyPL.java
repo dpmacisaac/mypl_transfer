@@ -3,6 +3,9 @@
  * Date: Spring 2022
  * Auth: S. Bowers
  * Desc: Driver program for HW-7
+ *
+ *  Bazel commands: bazel build //:mypl  || bazel test --test_output=errors //... || bazel test --test_output=errors //:lexer-test
+ * bazel-bin/mypl examples/
  */
 
 import java.io.InputStream;

@@ -1,0 +1,8 @@
+fun void main(){
+     var start = 1
+     var end = 10
+     for i from start upto end {
+        print(i)
+        end = end - 1
+     }
+}

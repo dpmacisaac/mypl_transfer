@@ -191,7 +191,7 @@ public class CodeGeneratorTest {
     vm.run();
     assertEquals("-1 -12 -1.25", output.toString());
   } 
-    
+
   //------------------------------------------------------------
   // Basic Function Calls
   //------------------------------------------------------------
@@ -243,7 +243,7 @@ public class CodeGeneratorTest {
     vm.run();
     assertEquals("0", output.toString());
   }
-  
+
   @Test
   public void multiLevelCall() throws Exception {
     String s = buildString
@@ -439,7 +439,7 @@ public class CodeGeneratorTest {
     vm.run();
     assertEquals("truetrue", output.toString());
   }
-  
+
   @Test
   public void falseAlphaRelationalOps() throws Exception {
     String s = buildString
@@ -494,11 +494,11 @@ public class CodeGeneratorTest {
     vm.run();
     assertEquals("falsetrue", output.toString());
   }
-  
+
   //------------------------------------------------------------
   // While Loops
   //------------------------------------------------------------
-  
+
   @Test
   public void basicWhile() throws Exception {
     String s = buildString
@@ -605,7 +605,7 @@ public class CodeGeneratorTest {
     vm.run();
     assertEquals("90", output.toString());
   }
-  
+
   //------------------------------------------------------------
   // If-Then-Else Statements
   //------------------------------------------------------------
@@ -793,7 +793,7 @@ public class CodeGeneratorTest {
     vm.run();
     assertEquals("3 true", output.toString());
   }
-  
+
   @Test
   public void basicRecursiveUDT() throws Exception {
     String s = buildString
@@ -913,5 +913,5 @@ public class CodeGeneratorTest {
     }
   }
   
-  
+
 }
