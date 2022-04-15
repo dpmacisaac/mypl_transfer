@@ -102,6 +102,7 @@ public class CodeGenerator implements Visitor {
     // 4. visit statement nodes
     for(Stmt stmt: node.stmts){
       stmt.accept(this);
+      fixCallStmt(stmt);
     }
     // 5. check to see if the last statement was a return (if not, add
     //    return nil)
@@ -109,6 +110,8 @@ public class CodeGenerator implements Visitor {
       currFrame.instructions.add(VMInstr.PUSH("nil"));
       currFrame.instructions.add(VMInstr.VRET());
     }
+
+    fixNoOp();
   } //DONE
   
   public void visit(VarDeclStmt node) throws MyPLException {
@@ -241,7 +244,12 @@ public class CodeGenerator implements Visitor {
   }
   
   public void visit(ReturnStmt node) throws MyPLException {
-    node.expr.accept(this);
+    if(node.expr != null){
+      node.expr.accept(this);
+    }
+    else{
+      currFrame.instructions.add(VMInstr.PUSH("nil"));
+    }
     currFrame.instructions.add(VMInstr.VRET());
   } //DONE
   

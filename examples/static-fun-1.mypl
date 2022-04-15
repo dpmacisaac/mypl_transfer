@@ -1,0 +1,61 @@
+
+#----------------------------------------------------------------------
+# Description: function declarations and function calls
+# Requires: basic variable declarations, simple rvalue expressions,
+#           return statements, built-in function types
+#----------------------------------------------------------------------
+
+
+#--------------------
+# passing tests
+#--------------------
+ fun int f(char a, int c, double d, int b){}
+
+fun void f1() {
+  var x = 1
+  return
+}
+
+fun int f2() {
+  var x = 1
+}
+
+fun bool f3() {
+  return true
+}
+
+
+fun bool f4() {
+  var x = f3()
+  return x
+}
+
+fun int f5() {
+  return f5()
+}
+
+
+fun void f6(int x) {
+  f6(1)
+  return nil
+}
+
+fun void f7(int x, bool y) {
+  return f7(1, true)
+}
+
+fun int f8(int x, string y, int z) {
+  return f8(f7(1, true), "", 42)
+}
+
+
+fun void main() {
+  print("hello world")
+  var int x = stoi("1")
+  var double y = stod("3.14")
+  var string z = itos(42)
+  var string u = dtos(3.14159)
+  var char v = get(0, "ab")
+  var int r = length("ab")
+  var string s = read()
+}

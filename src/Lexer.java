@@ -283,7 +283,13 @@ public class Lexer {
         currChar = read();
         while (true) {
           if(isSymbol(currChar, '\r') || isSymbol(currChar, '\n') ){
-            checkWhiteSpace();
+            if(isSymbol(currChar,'\r')){
+              if(isSymbol(peek(), '\n')){
+                currChar = read();
+              }
+            }
+            line++;
+            column = 0;
             break;
           }
           else {

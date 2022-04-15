@@ -128,6 +128,7 @@ public class StaticChecker implements Visitor {
         error("type '" + t + "' already defined", tdecl.typeName);
       // add as a record type to the symbol table
       symbolTable.add(t, "type");
+      //system.out.println("added " + t + " to symbol table");
       // add initial type info (rest added by TypeDecl visit function)
       typeInfo.add(t);
     }
@@ -147,6 +148,7 @@ public class StaticChecker implements Visitor {
       checkReturnType(fdecl.returnType);
       // add to the symbol table as a function
       symbolTable.add(funName, "fun");
+      //System.out.println("added " + funName + " to symbol table");
       // add to typeInfo
       typeInfo.add(funName);
       // add each formal parameter as a component type
@@ -199,6 +201,7 @@ public class StaticChecker implements Visitor {
     symbolTable.pushEnvironment();
     for(FunParam param: node.params){
       symbolTable.add(param.paramName.lexeme(), param.paramType.lexeme());
+      //System.out.println("added " + param.paramName.lexeme() + " to symbol table");
     }
     symbolTable.add("return",node.returnType.lexeme());
     for(Stmt stmt: node.stmts){
@@ -255,7 +258,7 @@ public class StaticChecker implements Visitor {
     }
     else{ //A Path
       String pathVarName = node.lvalue.get(0).lexeme();
-      if(!symbolTable.nameExistsInCurrEnv(pathVarName)){ //checks that the var name exist in symbolTable
+      if(!symbolTable.nameExists(pathVarName)){ //checks that the var name exist in symbolTable
         error("path not in symbolTable", node.lvalue.get(0));
       }
       String udtType = symbolTable.get(pathVarName); //gets the type of the first path variable name
@@ -510,7 +513,7 @@ public class StaticChecker implements Visitor {
       }
 
       if(argSize + 1 != typeInfo.components(nameOfFunct).size()){
-        System.out.println(argSize +  "  " + typeInfo.components(nameOfFunct).size());
+        //System.out.println(argSize +  "  " + typeInfo.components(nameOfFunct).size());
         error("incorrect amoung of arguement in call function", getFirstToken(node));
       }
       for(int i = 0; i < argSize; i++){
