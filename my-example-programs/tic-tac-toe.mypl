@@ -1,0 +1,231 @@
+# two player tic tac toe game
+
+type Player{
+    var symbol = ' '
+}
+
+type Node{
+    var Node down = nil
+    var Node right = nil
+    var char val = ' '
+}
+
+
+fun Node createBoard(int i, int j, int m, int n)
+{
+    if ((i > n - 1) or (j > m - 1)){
+        return nil
+    }
+    var Node temp = new Node
+    temp.right = createBoard(i, (j + 1), m, n)
+    temp.down  = createBoard(i + 1, j, m, n)
+    return temp
+}
+
+fun void display(Node head)
+{
+    print("\n")
+    var Node currRight = nil
+    var Node currDown = head
+    var row = 0
+    print("   ")
+    for i from 0 upto 2{
+        print("c"+itos(i) + "  ")
+    }
+    print("\n")
+
+    while (currDown.down != nil) {
+        currRight = currDown
+        print("r"+itos(row) + " ")
+        row = row + 1
+        while (currRight.right != nil) {
+            print(" "+currRight.val + " |")
+            currRight = currRight.right
+        }
+        print(" "+ currRight.val)
+        print("\n   -----------\n")
+        currDown = currDown.down;
+    }
+    currRight = currDown
+    print("r"+itos(row) + " ")
+    while (currRight.right != nil) {
+        print(" "+currRight.val + " |")
+        currRight = currRight.right
+    }
+    print(" "+ currRight.val)
+    print("\n")
+    print("\n")
+}
+
+fun bool isWinner(char player, Node head){
+    var curr = head
+    if(checkRow(player, head) or checkCol(player, head) or checkDiag(player, head)){
+        return true
+    }
+    return false
+}
+
+fun bool checkRow(char player, Node head){
+     var Node currRight = nil
+     var Node currDown = head
+     var inALine = 0
+     while(currDown != nil){
+        currRight = currDown
+        while(currRight != nil){
+            if(currRight.val == player){
+                inALine = inALine + 1
+            }
+            if(inALine == 3){
+                return true
+            }
+            currRight = currRight.right
+
+        }
+        inALine = 0
+        currDown = currDown.down
+     }
+     return false
+}
+
+fun bool checkCol(char player, Node head){
+     var curr = head
+     var currLevel = head
+     var inALine = 0
+
+     for l from 0 upto 2{
+         for i from 0 upto 2{
+            curr = currLevel
+             for col from 0 upto l-1{
+                curr = curr.right
+             }
+             if(curr.val == player){
+                inALine = inALine + 1
+             }
+             currLevel = currLevel.down
+         }
+         if(inALine == 3){
+            return true
+         }
+         currLevel = head
+         inALine = 0
+     }
+     return false
+}
+fun bool checkDiag(char player, Node head){
+    var inALine = 0
+    var curr = head
+    #checks diag from top left to bottom right
+    for j from 0 upto 2{
+        for i from 0 upto j-1{
+            curr = curr.down
+        }
+        for i from 0 upto j-1{
+            curr = curr.right
+        }
+        if curr.val == player{
+            inALine = inALine + 1
+        }
+
+        curr = head
+    }
+    if(inALine == 3){
+        return true
+    }
+    inALine = 0
+    #checks diag from top right to bottom right
+    curr = head
+    var level = 0
+    for j from 0 upto 2{
+        curr = head
+        for i from 1 upto level{
+            curr = curr.down
+        }
+        for i from 1 downto level{
+            curr = curr.right
+        }
+        if(curr.val == player){
+            inALine = inALine + 1
+        }
+        level = level + 1
+    }
+    if(inALine == 3){
+            return true
+    }
+
+    return false
+}
+
+fun bool placePiece(char piece, int row, int col, Node head){
+    var Node curr = head
+    if ((row > 2) or (row < 0) or (col > 2) or (col < 0)){
+        print("Response out of bounds, try again\n")
+        return false
+    }
+
+    for i from 0 upto (row - 1){
+            curr = curr.down
+    }
+    for i from 0 upto (col - 1){
+        curr = curr.right
+    }
+
+    if(curr.val != ' '){
+        print("Space already taken, try again\n")
+        return false
+    }
+    curr.val = piece
+    return true
+}
+
+fun void main(){
+    var Node head = createBoard(0,0,3,3)
+
+    var player1 = new Player
+    player1.symbol = 'x'
+    var player2 = new Player
+    player2.symbol = 'o'
+    var turnCount = 1
+    var turn = 'x'
+    var rowRes = ""
+    var colRes = ""
+    var winnerExists = false
+    while(winnerExists != true){
+        if(turnCount == 10){
+            display(head)
+            print("Game Over, all out of turns")
+            return
+        }
+        display(head)
+        if(turn == 'x'){
+            print("Player 1: ")
+        }
+        else {
+            print("Player 2: ")
+        }
+        print("Where would you like to place your piece?\n" + "Row:")
+        rowRes = read()
+        print("Col:")
+        colRes = read()
+        if(placePiece(turn, stoi(rowRes), stoi(colRes), head)){
+            turnCount = turnCount + 1
+            winnerExists = isWinner(turn, head)
+            if(winnerExists != true){
+                if(turn == 'x'){
+                    turn = 'o'
+                }
+                else{
+                    turn = 'x'
+                }
+            }
+        }
+
+    }
+    display(head)
+    if(turn == 'x'){
+        print("Player 1: ")
+    }
+    else {
+        print("Player 2: ")
+    }
+    print("You win!")
+}

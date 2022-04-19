@@ -1,0 +1,45 @@
+#Calculates a GPA based on current grades and the amount of credits associated with each class
+#Uses a linked list format for adding grades
+
+type GradeNode{
+    var credits = 0.0
+    var grade = 0.0
+    var GradeNode next = nil
+}
+
+fun double calculateGPA(GradeNode head){
+    var double bottom = 0.0
+    var double top = 0.0
+    var GradeNode currentNode = head
+    while(currentNode != nil){
+        top = top + (currentNode.credits * currentNode.grade)
+        bottom = bottom + currentNode.credits
+        currentNode = currentNode.next
+    }
+    var double gpa = top/bottom
+    return gpa
+}
+
+fun void main(){
+    var entering  = true
+    var GradeNode head = new GradeNode
+    print("enter a grade from a class(e.g 4.0)" + "\n")
+    head.grade = stod(read())
+    print("enter a amount of credits for that class (e.g 3.0)" + "\n")
+    head.credits = stod(read())
+    print("Would you like to add another class? Y/N"+ "\n")
+    if(read() == "N"){entering = false}
+    var GradeNode currentNode = head
+    while(entering){
+        currentNode.next = new GradeNode
+        currentNode = currentNode.next
+        print("enter a grade from a class(e.g 4.0" + "\n")
+        currentNode.grade = stod(read())
+        print("enter a amount of credits for that class (e.g 3.0)"+ "\n")
+        currentNode.credits = stod(read())
+        print("Would you like to add another class? Y/N" + "\n")
+        if(read() == "N"){entering = false}
+    }
+    print("Your GPA is: ")
+    print(calculateGPA(head))
+}

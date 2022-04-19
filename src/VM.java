@@ -140,6 +140,14 @@ class VM {
         try{
           frame.variables.remove(address);
         }catch(Exception e){}
+
+        int count = frame.variables.size();
+
+        while(frame.variables.size() < address) {
+          frame.variables.add(count, NIL_OBJ);
+          count++;
+        }
+
         frame.variables.add(address, x);
       }
 

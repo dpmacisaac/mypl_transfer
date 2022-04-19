@@ -1,0 +1,189 @@
+
+type Node{
+    var int val = nil
+    var Node next = nil
+}
+
+fun Node mergeSort(Node head){
+    if(head == nil){
+        return nil
+    }
+
+}
+
+fun Node insertNode(Node head, int val){
+    var Node x = new Node
+    x.val = val
+    if(head == nil){
+        return x
+    }
+    else{
+        var Node curr = head
+        while(curr.next != nil){
+            curr = curr.next
+        }
+        curr.next = x
+        return head
+    }
+}
+
+fun Node removeNode(Node head, int index){
+    if(head == nil){
+        print("ERROR: head is nil, cannot remove a node in an empty list")
+        return
+    }
+
+    if(index == 0){
+        var Node temp = head.next
+        delete head
+        return temp
+    }
+
+    var Node before = head
+    var Node curr = head.next
+    for i from 1 upto (index-1){
+        if(curr.next == nil){
+            print("Error: index out of bounds")
+            return
+        }
+        curr = curr.next
+        before = before.next
+    }
+    before.next = curr.next
+    delete curr
+    return head
+}
+
+fun void printList(Node head){
+    if(head == nil){
+        return
+    }
+    var Node curr = head
+    print("[" + itos(curr.val) + "]")
+    curr = curr.next
+    while(curr != nil){
+        print("->")
+        print("["+itos(curr.val)+"]")
+        curr = curr.next
+    }
+    print("\n")
+}
+
+fun int listLen(Node head){
+    var Node curr = head
+    var count = 0
+    while(curr != nil){
+        curr = curr.next
+        count = count + 1
+    }
+    return count
+}
+
+fun void main(){
+    var Node head = insertNode(nil, 3)
+    head = insertNode(head, 4)
+    printList(head)
+    print("\n")
+    head = removeNode(head, 1)
+    printList(head)
+    print("\n")
+
+    head = insertNode(head, 5)
+    head = insertNode(head, 7)
+    head = insertNode(head, 6)
+    head = insertNode(head, 9)
+    head = insertNode(head, 1)
+    printList(head)
+    head = merge_sort(head, (listLen(head)))
+    printList(head)
+    head = removeNode(head, 4)
+    printList(head)
+    head = removeNode(head, 4)
+    printList(head)
+
+}
+
+fun Node merge_sort(Node left, int len){
+
+    if(len <= 1){return left}
+    var int mid = len/2
+    var Node right = left
+
+    for i from 0 upto (mid-1) {
+      # for(int i = 0; i < mid; i++){
+      right = right.next
+    }
+    left = merge_sort(left, mid)
+    right = merge_sort(right, len-mid)
+
+    var Node curr = nil
+    var Node front = nil
+    var Node end = nil
+
+    var int leftcount = 0
+    var int rightcount = mid
+
+    if(left.val < right.val) {
+      front = left
+      left=left.next
+      leftcount = leftcount + 1
+    }
+    else {
+      front = right
+      right = right.next
+      rightcount = rightcount + 1
+    }
+    curr = front
+
+    while((leftcount < mid) and (rightcount < len)){
+
+      if(left.val < right.val){
+        curr.next = left
+        curr = left
+        left = left.next
+        leftcount = leftcount + 1
+      }
+      else{
+        curr.next = right
+        curr = right
+        right = right.next
+
+        rightcount = rightcount + 1
+
+      }
+
+    }
+    while(leftcount < mid){
+       curr.next = left
+       curr = left
+       left = left.next
+       leftcount = leftcount + 1
+    }
+
+    while(rightcount<len)
+    {
+        curr.next = right
+        curr = right
+        right = right.next
+        rightcount = rightcount + 1;
+    }
+
+    curr.next = nil;
+
+    return front;
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

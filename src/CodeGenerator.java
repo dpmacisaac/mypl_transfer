@@ -93,6 +93,7 @@ public class CodeGenerator implements Visitor {
     // 2. create a variable mapping for the frame
     varMap = new HashMap<>();
     currVarIndex = 0;
+
     // 3. store args
     for(FunParam param:node.params){
       varMap.put(param.paramName.lexeme(), currVarIndex);
@@ -138,7 +139,7 @@ public class CodeGenerator implements Visitor {
       currFrame.instructions.add(VMInstr.SETFLD(node.lvalue.get(node.lvalue.size()-1).lexeme()));
     }
 
-  } //TODO: Add Paths
+  } //DONE
   
   public void visit(CondStmt node) throws MyPLException {
 
